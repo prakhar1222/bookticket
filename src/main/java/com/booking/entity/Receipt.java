@@ -1,28 +1,27 @@
 package com.booking.entity;
 
 import com.booking.enumm.Section;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
+@Table(name = "receipts")
 @Getter
 @Setter
-@ToString
 public class Receipt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receipt_generator")
     private Long id;
 
-    @Column(name = "from")
+    @Column(name = "from_city")
     private String from;
 
-    @Column(name = "to")
+    @Column(name = "to_city")
     private String to;
 
     @Column(name = "seatno")
@@ -35,8 +34,10 @@ public class Receipt {
     private Section section;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "myuser_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private User user;
+
+
 }

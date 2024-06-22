@@ -13,4 +13,5 @@ public class ReceiptDto {
     private Double price;
     private int seatNo;
     private Long userId;
+    private Long receiptId;
 }

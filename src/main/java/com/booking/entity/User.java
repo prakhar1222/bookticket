@@ -1,24 +1,22 @@
 package com.booking.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.util.List;
 
 @Entity
-@ToString
+@Table(name = "myuser")
 @Getter
 @Setter
-@Data
-@Table(name = "user")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
-    private Long id;
+    private long id;
 
     @Column(name = "firstname")
     private String firstName;
@@ -30,10 +28,4 @@ public class User {
     private String email;
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Receipt> receipts;
-
-
 }
-
